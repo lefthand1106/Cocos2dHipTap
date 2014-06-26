@@ -314,7 +314,7 @@
     
     //結果表示
     CCLabelTTF *resultLabel =
-    [CCLabelTTF labelWithString:[NSString stringWithFormat:@"男が：%d、女が%d。",mancount,womancount]
+    [CCLabelTTF labelWithString:[NSString stringWithFormat:@"猿：%d　豚：%d",mancount,womancount]
                                            fontName:@"Arial Rounded MT Bold"
                                            fontSize:20];
     resultLabel.color = ccc3(0, 0, 0);
@@ -377,7 +377,7 @@
         SLComposeViewController *composeViewController = [SLComposeViewController
                                                           composeViewControllerForServiceType:serviceType];
         //デフォルトメッセージ　ハッシュタグ付き
-        [composeViewController setInitialText:[NSString stringWithFormat:@"男が：%d、女が%d。#ケツタップ", mancount,womancount]];
+        [composeViewController setInitialText:[NSString stringWithFormat:@"猿：%d　豚：%d#ケツタップ", mancount,womancount]];
         // URLを追加(アプリのストアURL)
         [composeViewController addURL:[NSURL URLWithString:@"https://itunes.apple.com/"]];
         //cocos2d対応
