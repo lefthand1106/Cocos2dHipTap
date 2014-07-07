@@ -7,8 +7,6 @@
 //
 
 #import "QuestionLayer.h"
-//#import "TitleLayer.h"
-
 
 @implementation QuestionLayer
 
@@ -50,7 +48,7 @@
         [self addChild:titleLabel];
         
         CCLabelTTF *howToPlayLabel = [CCLabelTTF labelWithString:
-                              @"男のケツと女のケツが落ちてくる順番通りに\n\nボタンを押していこう。\n\n落ちるスピードはどんどん速くなるよ。\n\n間違って押したらゲームオーバだよ。"
+                              @"猿のケツと豚のケツが落ちてくる順番通りに\n\nボタンを押していこう。\n\n落ちるスピードはどんどん速くなるよ。\n\n間違って押したらゲームオーバだよ。"
                                                 fontName:@"Helvetica-BoldOblique"
                                                 fontSize:15];
         howToPlayLabel.color = ccc3(0, 0, 0);//黒

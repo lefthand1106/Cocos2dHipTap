@@ -7,7 +7,8 @@
 //
 //ゲーム機能処理クラス
 
-#import <Foundation/Foundation.h>
+//#import <UIKit/UIKit.h>
+//#import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import <Social/Social.h>
 #import "TitleLayer.h"

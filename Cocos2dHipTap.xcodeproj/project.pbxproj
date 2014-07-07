@@ -164,6 +164,10 @@
 		AC8F39A4193DCFDC0067E26D /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F399F193DCFDC0067E26D /* CCScrollLayer.m */; };
 		AC8F39AB193DDB160067E26D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8F39AA193DDB160067E26D /* Images.xcassets */; };
 		AC8F39AD193DDD200067E26D /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8F39AC193DDD200067E26D /* Images-2.xcassets */; };
+		ACF16518195C66CC001E72C7 /* manhip1.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF16516195C66CC001E72C7 /* manhip1.png */; };
+		ACF16519195C66CC001E72C7 /* manhip2.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF16517195C66CC001E72C7 /* manhip2.png */; };
+		ACF1651C195C676E001E72C7 /* womanhip1.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF1651A195C676E001E72C7 /* womanhip1.png */; };
+		ACF1651D195C676E001E72C7 /* womanhip2.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF1651B195C676E001E72C7 /* womanhip2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -476,6 +480,10 @@
 		AC8F39A5193DD0B70067E26D /* Cocos2dHipTap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Cocos2dHipTap.entitlements; sourceTree = "<group>"; };
 		AC8F39AA193DDB160067E26D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC8F39AC193DDD200067E26D /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		ACF16516195C66CC001E72C7 /* manhip1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manhip1.png; sourceTree = "<group>"; };
+		ACF16517195C66CC001E72C7 /* manhip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manhip2.png; sourceTree = "<group>"; };
+		ACF1651A195C676E001E72C7 /* womanhip1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = womanhip1.png; sourceTree = "<group>"; };
+		ACF1651B195C676E001E72C7 /* womanhip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = womanhip2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -940,8 +948,12 @@
 			children = (
 				AC8F395B193DC9710067E26D /* background.png */,
 				AC8F395C193DC9710067E26D /* credits.png */,
+				ACF16516195C66CC001E72C7 /* manhip1.png */,
+				ACF16517195C66CC001E72C7 /* manhip2.png */,
 				AC8F395E193DC9710067E26D /* Default-Landscape~ipad.png */,
 				AC8F395F193DC9710067E26D /* Default.png */,
+				ACF1651A195C676E001E72C7 /* womanhip1.png */,
+				ACF1651B195C676E001E72C7 /* womanhip2.png */,
 				AC8F3961193DC9710067E26D /* gamecenter.png */,
 				AC8F3962193DC9710067E26D /* gameover.png */,
 				AC8F3963193DC9710067E26D /* Icon-72.png */,
@@ -1038,6 +1050,7 @@
 				AC8F398C193DC9710067E26D /* title.png in Resources */,
 				AC8F397C193DC9710067E26D /* gameover.png in Resources */,
 				AC8F3987193DC9710067E26D /* nextbackground.png in Resources */,
+				ACF1651C195C676E001E72C7 /* womanhip1.png in Resources */,
 				AC8F39AB193DDB160067E26D /* Images.xcassets in Resources */,
 				AC8F3978193DC9710067E26D /* Default-Landscape~ipad.png in Resources */,
 				AC8F397F193DC9710067E26D /* Icon-Small.png in Resources */,
@@ -1046,6 +1059,8 @@
 				AC8F3984193DC9710067E26D /* lefthandmakerco.png in Resources */,
 				AC8F3993193DC97E0067E26D /* wrong.mp3 in Resources */,
 				AC8F398E193DC9710067E26D /* womanhip.png in Resources */,
+				ACF16519195C66CC001E72C7 /* manhip2.png in Resources */,
+				ACF1651D195C676E001E72C7 /* womanhip2.png in Resources */,
 				AC8F3983193DC9710067E26D /* info.png in Resources */,
 				AC8F3976193DC9710067E26D /* credits.png in Resources */,
 				AC8F398A193DC9710067E26D /* soundoff.png in Resources */,
@@ -1058,6 +1073,7 @@
 				AC8F3985193DC9710067E26D /* line.png in Resources */,
 				AC8F398B193DC9710067E26D /* soundon.png in Resources */,
 				AC8F3979193DC9710067E26D /* Default.png in Resources */,
+				ACF16518195C66CC001E72C7 /* manhip1.png in Resources */,
 				AC8F397E193DC9710067E26D /* Icon-Small-50.png in Resources */,
 				AC8F3981193DC9710067E26D /* Icon.png in Resources */,
 				AC8F398D193DC9710067E26D /* twitter.png in Resources */,
@@ -1211,6 +1227,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "0027A797-9289-40C5-BDBE-BEDAD6DC1EEE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1220,7 +1237,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: shinohara masaki (EHSYQFTGSG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: shinohara masaki (EHSYQFTGSG)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -1230,6 +1248,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "0027A797-9289-40C5-BDBE-BEDAD6DC1EEE";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1256,7 +1275,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "159D557E-2F7A-4D4E-B3AF-3EA4D92052C6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1269,7 +1288,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Cocos2dHipTap/Cocos2dHipTap.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: shinohara masaki (EHSYQFTGSG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1282,7 +1301,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "159D557E-2F7A-4D4E-B3AF-3EA4D92052C6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

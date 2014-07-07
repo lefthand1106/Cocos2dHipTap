@@ -7,11 +7,6 @@
 //
 
 #import "TitleLayer.h"
-//#import "InfoLayer.h"
-//#import "GameLayer.h"
-//#import "QuestionLayer.h"
-//#import <GameKit/GameKit.h>
-
 
 @implementation TitleLayer
 
@@ -49,12 +44,18 @@
         [scrollLayer selectPage: 1];
         scrollLayer.delegate = self;
         
+        //サウンド初期設定
+        [[SimpleAudioEngine sharedEngine]setMute:soundEffect];
+        
         [self startPage];
         
 	}
+    
+	CCLOG(@"soundeffect:%d", soundEffect);
 	
-	return self;
+    return self;
 }
+
 
 //////////////////////スクロールレイヤー設定start///////////////////////////
 -(NSArray *)scrollLayerPages
@@ -64,21 +65,18 @@
     /////gamestartpageレイヤーstart/////
 	CCLayer *gameStartPage = [CCLayer node];
 	CCLabelTTF *titleLabel = [CCLabelTTF labelWithString:@"HIPTAP"
-                                            fontName:@"Helvetica-BoldOblique"
-                                            fontSize:25];
+                                                fontName:@"Helvetica-BoldOblique"
+                                                fontSize:25];
     titleLabel.color = ccc3(0, 0, 0);//黒
 	titleLabel.position =  ccp(screenSize.width / 2, screenSize.height / 2);
 	[gameStartPage addChild:titleLabel];
     
     
     //メニュー設定
-    CCMenuItem *soundOn = [CCMenuItemImage itemWithNormalImage:@"soundon.png" selectedImage:@"soundon.png" disabledImage:nil block:^(id sender) {
-        [self setSoundOn];
-    }];
+    soundon = [[CCMenuItemImage itemWithNormalImage:@"soundon.png" selectedImage:@"soundon.png" target:nil selector:nil]retain];
+    soundoff = [[CCMenuItemImage itemWithNormalImage:@"soundoff.png" selectedImage:@"soundoff.png" target:nil selector:nil]retain];
     
-    CCMenuItem *soundOff = [CCMenuItemImage itemWithNormalImage:@"soundoff.png" selectedImage:@"soundoff.png" disabledImage:nil block:^(id sender) {
-        [self setSoundOff];
-    }];
+    toggleItem = [CCMenuItemToggle itemWithTarget:self selector:@selector(setSoundEffect:) items:soundon, soundoff, nil];
     
     CCMenuItem *question = [CCMenuItemImage itemWithNormalImage:@"question.png" selectedImage:nil disabledImage:nil block:^(id sender) {
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[QuestionLayer scene]withColor:ccWHITE]];
@@ -88,11 +86,12 @@
         [self GoToRanking];
     }];
     
-    CCMenu *Menu = [CCMenu menuWithItems:soundOn,soundOff, question, gamecenter, nil];
+    CCMenu *Menu = [CCMenu menuWithItems:toggleItem, question, gamecenter, nil];
     [Menu setScale:1.0];
     [Menu setPosition:ccp(screenSize.width /3,  Menu.contentSize.height -50 )];
     [Menu alignItemsHorizontallyWithPadding:15];
     [gameStartPage addChild:Menu];
+    
     
     //インフォ設定
     CCMenuItem *info = [CCMenuItemImage itemWithNormalImage:@"info.png" selectedImage:nil disabledImage:nil block:^(id sender) {
@@ -116,33 +115,33 @@
 	gameStartMenu.position = CGPointMake(winSize.width / 2, 60);
 	[gameStartPage addChild:gameStartMenu];
     /////gamestartpageレイヤーend/////
-
+    
     /* 保留
-    //ランキングレイヤー
-	CCLayer *rankingPage = [CCLayer node];
-	CCLabelTTF *label1 = [CCLabelTTF labelWithString:@"Ranking"
-                                            fontName:@"Arial Rounded MT Bold"
-                                            fontSize:25];
-	label1.color = ccc3(0, 0, 0);//黒
-    label1.position =  ccp(size.width /2 , size.height/1.2 );
-	[rankingPage addChild:label1];
-    
-    //達成率レイヤー
-    CCLayer *achievementsPage = [CCLayer node];
-	CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Achievements"
-                                            fontName:@"Arial Rounded MT Bold"
-                                            fontSize:25];
-    
-	label2.color = ccc3(0, 0, 0);//黒
-    label2.position =  ccp(size.width /2 , size.height/1.2 );
-	[achievementsPage addChild:label2];
+     //ランキングレイヤー
+     CCLayer *rankingPage = [CCLayer node];
+     CCLabelTTF *label1 = [CCLabelTTF labelWithString:@"Ranking"
+     fontName:@"Arial Rounded MT Bold"
+     fontSize:25];
+     label1.color = ccc3(0, 0, 0);//黒
+     label1.position =  ccp(size.width /2 , size.height/1.2 );
+     [rankingPage addChild:label1];
+     
+     //達成率レイヤー
+     CCLayer *achievementsPage = [CCLayer node];
+     CCLabelTTF *label2 = [CCLabelTTF labelWithString:@"Achievements"
+     fontName:@"Arial Rounded MT Bold"
+     fontSize:25];
+     
+     label2.color = ccc3(0, 0, 0);//黒
+     label2.position =  ccp(size.width /2 , size.height/1.2 );
+     [achievementsPage addChild:label2];
      */
     
     /////キャラクターレイヤーstart/////
     CCLayer *characterPage = [CCLayer node];
 	CCLabelTTF *characterLabel = [CCLabelTTF labelWithString:@"CHARACTER"
-                                            fontName:@"Helvetica-BoldOblique"
-                                            fontSize:25];
+                                                    fontName:@"Helvetica-BoldOblique"
+                                                    fontSize:25];
 	characterLabel.color = ccc3(0, 0, 0);//黒
     characterLabel.position =  ccp(screenSize.width /2 , screenSize.height/1.2);
 	[characterPage addChild:characterLabel];
@@ -189,35 +188,48 @@
 
 
 //////////////////////サウンド設定start///////////////////////////
--(void)setSoundOn{
-    // This will unmute <span id="IL_AD1" class="IL_AD">the sound</span>
-    [[SimpleAudioEngine sharedEngine] setMute:0];
-}
-
--(void)setSoundOff{
-    //This will mute the sound
-    [[SimpleAudioEngine sharedEngine] setMute:1];
+-(void)setSoundEffect:(id)sender
+{
+    //  toggleItem = (CCMenuItemToggle *)sender;
+    if (toggleItem.selectedItem == soundon )
+    {
+        soundEffect = 0;
+        [[SimpleAudioEngine sharedEngine] setMute:soundEffect];
+        CCLOG(@"soundeffect:%d", soundEffect);
+    }
+    else if (toggleItem.selectedItem == soundoff)
+    {
+        soundEffect = 1;
+        [[SimpleAudioEngine sharedEngine] setMute:soundEffect];
+        CCLOG(@"soundeffect:%d", soundEffect);
+        
+    }
+    
+    
 }
 //////////////////////サウンド設定end///////////////////////////
 
 
-//////////////////////ゲームセンターstart///////////////////////////
+//////////////////////ゲームセンターgoamecenter start///////////////////////////
 //リーダーボードを立ち上げる
 - (void)GoToRanking {
-    GKLeaderboardViewController *leaderboardController =
-    [[GKLeaderboardViewController alloc] init];
+    GKGameCenterViewController *gcView = [GKGameCenterViewController new];
     
-    if (leaderboardController != nil)
+    if (gcView != nil)
     {
-        leaderboardController.leaderboardDelegate = self;
-        [[CCDirector sharedDirector]
-         presentModalViewController:leaderboardController animated:YES];
+        gcView.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcView.gameCenterDelegate = self;
+        
+        [[[CCDirector sharedDirector]parentViewController] presentViewController:gcView animated:YES completion:nil];
     }
+    
 }
+
 //リーダーボードで完了を押した時に呼ばれる
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-    [[CCDirector sharedDirector] dismissModalViewControllerAnimated:YES];
+    [[[CCDirector sharedDirector]parentViewController] dismissViewControllerAnimated:YES completion:nil];
+
 }
 //////////////////////ゲームセンターend///////////////////////////
 
@@ -228,5 +240,11 @@
     
 }
 
+// on "dealloc" you need to release all your retained objects
+- (void) dealloc
+{
+    [super dealloc];
+    
+}
 
 @end

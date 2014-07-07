@@ -7,7 +7,6 @@
 //
 
 #import "GameLayer.h"
-//#import "TitleLayer.h"
 
 @implementation GameLayer
 
@@ -35,9 +34,6 @@
         colorLayer.position = ccp( 0, 0);
         [self addChild:colorLayer z:0];
         
-        //タッチ可にする
-        self.TouchEnabled = YES;
-		
         // カウンター画像配置start//
         count = 0;
         NSString * stringCount = [NSString stringWithFormat:@"%d", count];
@@ -84,11 +80,11 @@
         //落下画像配置--end//
         
         //タップ画像配置--start//
-        CCMenuItem *menu1 = [CCMenuItemImage itemWithNormalImage:@"manhip.png" selectedImage:nil disabledImage:nil block:^(id sender) {
+        CCMenuItem *menu1 = [CCMenuItemImage itemWithNormalImage:@"manhip1.png" selectedImage:@"manhip2.png" disabledImage:nil block:^(id sender) {
             [self touchMan];
         }];
         
-        CCMenuItem *menu2 = [CCMenuItemImage itemWithNormalImage:@"womanhip.png" selectedImage:nil disabledImage:nil block:^(id sender) {
+        CCMenuItem *menu2 = [CCMenuItemImage itemWithNormalImage:@"womanhip1.png" selectedImage:@"womanhip2.png" disabledImage:nil block:^(id sender) {
             [self touchWoman];
         }];
         
@@ -106,7 +102,7 @@
         //soundをプレロード
         [[SimpleAudioEngine sharedEngine]preloadEffect:@"wrong.mp3"];
         [[SimpleAudioEngine sharedEngine]preloadEffect:@"correct.mp3"];
-        
+
         //画像落下スピード初期値
         dmSpeed = 1.0f;
         
@@ -250,53 +246,6 @@
         }
     }
 }
-
-/*
--(void)checkForCollision
-{
-    float lineIconSize = [line texture].contentSize.width;
-    float manImageSize = [[men lastObject] texture].contentSize.width;
-    float womanImageSize = [[women lastObject] texture].contentSize.width;
-    
-    float lineCollisionRadius = lineIconSize * 0.005f;
-    float manIconCollisionRadius = manImageSize * 0.4f;
-    float womanIconCollisionRadius = womanImageSize * 0.4f;
-    
-    
-    float maxCollisionDistance1 = lineCollisionRadius + manIconCollisionRadius;
-    float maxCollisionDistance2 = lineCollisionRadius + womanIconCollisionRadius;
-    
-    int numMen = [men count];
-    for (int i = 0; i < numMen; i++) {
-        manIcon = [men objectAtIndex:i];
-        if ([manIcon numberOfRunningActions] == 0)
-        {
-            continue;
-        }
-        float actualDistance = ccpDistance(line.position, manIcon.position);
-        
-        if (actualDistance < maxCollisionDistance1) {
-            [[SimpleAudioEngine sharedEngine] playEffect:@"wrong.mp3"];
-            [self gameover];
-        }
-    }
-    
-    int numWomen = [women count];
-    for (int i = 0; i < numWomen; i++) {
-        womanIcon = [women objectAtIndex:i];
-        if ([womanIcon numberOfRunningActions] == 0)
-        {
-            continue;
-        }
-        float actualDistance = ccpDistance(line.position, womanIcon.position);
-        
-        if (actualDistance < maxCollisionDistance2) {
-            [[SimpleAudioEngine sharedEngine] playEffect:@"wrong.mp3"];
-            [self gameover];
-        }
-    }
-}
- */
 ///////////////////衝突処理end///////////////////
 
 
@@ -314,7 +263,7 @@
     
     //結果表示
     CCLabelTTF *resultLabel =
-    [CCLabelTTF labelWithString:[NSString stringWithFormat:@"猿：%d　豚：%d",mancount,womancount]
+    [CCLabelTTF labelWithString:[NSString stringWithFormat:@"猿：%d　豚：%d　\n\n合計: %d",mancount, womancount, count]
                                            fontName:@"Arial Rounded MT Bold"
                                            fontSize:20];
     resultLabel.color = ccc3(0, 0, 0);
@@ -333,6 +282,7 @@
     //リスタート
     CCMenuItem *reStart = [CCMenuItemImage itemWithNormalImage:@"restart.png" selectedImage:nil disabledImage:nil block:^(id sender) {
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[GameLayer scene]withColor:ccWHITE]];
+     
     }];
     //ツイート
     CCMenuItem *tweet = [CCMenuItemImage itemWithNormalImage:@"twitter.png" selectedImage:nil disabledImage:nil target:self selector:@selector(SLComposeViewControllerButtonPressed:)];
@@ -344,10 +294,10 @@
     [resultMenu alignItemsHorizontallyWithPadding:40];
     [gameover addChild:resultMenu];
     
-    // Game Center　スコア送信
-    GKScore *scoreReporter = [[GKScore alloc] initWithCategory:@"TapHip"];
-    scoreReporter.value = count;
-    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+    // GameCenter　スコア送信
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"grp.HT"];
+    score.value = count;
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error){
         if (error != nil)
         {
             CCLOG(@"error %@",error);
@@ -377,7 +327,7 @@
         SLComposeViewController *composeViewController = [SLComposeViewController
                                                           composeViewControllerForServiceType:serviceType];
         //デフォルトメッセージ　ハッシュタグ付き
-        [composeViewController setInitialText:[NSString stringWithFormat:@"猿：%d　豚：%d#ケツタップ", mancount,womancount]];
+        [composeViewController setInitialText:[NSString stringWithFormat:@"猿：%d　豚：%d 合計：%d#ケツタップ#HipTap", mancount,womancount,count]];
         // URLを追加(アプリのストアURL)
         [composeViewController addURL:[NSURL URLWithString:@"https://itunes.apple.com/"]];
         //cocos2d対応

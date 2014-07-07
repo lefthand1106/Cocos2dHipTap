@@ -7,10 +7,8 @@
 //
 
 #import "cocos2d.h"
-
 #import "AppDelegate.h"
 #import "IntroLayer.h"
-#import <GameKit/GameKit.h>
 
 @implementation MyNavigationController
 
@@ -87,7 +85,7 @@
 	
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
-	director_.wantsFullScreenLayout = YES;
+	//director_.wantsFullScreenLayout = YES;
 	
 	// Display FSP and SPF
 	[director_ setDisplayStats:NO];
@@ -138,13 +136,16 @@
 	[window_ makeKeyAndVisible];
 	
     //gamecenterユーザ認証
-    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
-        if ( error != nil ) {
-            // エラー処理
-        } else {
-            // 正常にログインできた場合
+  
+    GKLocalPlayer* player = [GKLocalPlayer localPlayer];
+    player.authenticateHandler = ^(UIViewController* ui, NSError* error )
+    {
+        if( nil != ui )
+        {
+        [[[CCDirector sharedDirector]parentViewController]presentViewController:ui animated:YES completion:nil];
         }
-    }];
+        
+    };
     
 	return YES;
 }
@@ -198,7 +199,6 @@
 {
 	[window_ release];
 	[navController_ release];
-	
 	[super dealloc];
 }
 @end

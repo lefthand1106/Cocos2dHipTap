@@ -7,8 +7,9 @@
 //
 //アプリ起動直後のタイトルページ処理クラス
 
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
+//#import <UIKit/UIKit.h>
 #import "cocos2d.h"
 #import "CCScrollLayer.h"
 #import "GameLayer.h"
@@ -17,10 +18,13 @@
 #import "InfoLayer.h"
 
 
-@interface TitleLayer : CCLayer<CCScrollLayerDelegate, GKLeaderboardViewControllerDelegate>{
+@interface TitleLayer : CCLayer<CCScrollLayerDelegate, GKGameCenterControllerDelegate>{//gamecenter
  
     int startPage;//スクロール用
-   
+    CCMenuItem * soundon;
+    CCMenuItem * soundoff;
+    CCMenuItemToggle *toggleItem;
+    int soundEffect;
 }
 
 +(CCScene *) scene;

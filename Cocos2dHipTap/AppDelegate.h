@@ -5,8 +5,8 @@
 //  Created by 篠原正樹 on 2014/06/03.
 //  Copyright masakishinohara 2014年. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
+#import <GameKit/GameKit.h>
 #import "cocos2d.h"
 
 // Added only for iOS 6 support
@@ -17,8 +17,7 @@
 {
 	UIWindow *window_;
 	MyNavigationController *navController_;
-
-	CCDirectorIOS	*director_;							// weak ref
+	CCDirectorIOS	*director_;
 }
 
 @property (nonatomic, retain) UIWindow *window;
